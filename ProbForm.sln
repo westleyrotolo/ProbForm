@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.Models", "ProbForm.Models\ProbForm.Models.csproj", "{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.TimeTrigger", "ProbForm.TimeTrigger\ProbForm.TimeTrigger.csproj", "{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}.Debug|x86.ActiveCfg = Debug|x86
+		{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}.Debug|x86.Build.0 = Debug|x86
+		{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}.Release|x86.ActiveCfg = Release|x86
+		{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}.Release|x86.Build.0 = Release|x86
+		{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}.Debug|x86.Build.0 = Debug|Any CPU
+		{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}.Release|x86.ActiveCfg = Release|Any CPU
+		{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
