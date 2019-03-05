@@ -15,4 +15,7 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProbForm.Models\ProbForm.Models.csproj" />
+  </ItemGroup>
 </Project>

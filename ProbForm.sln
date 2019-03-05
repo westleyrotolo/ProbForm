@@ -1,15 +1,17 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.Models", "ProbForm.Models\ProbForm.Models.csproj", "{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.TimeTrigger", "ProbForm.TimeTrigger\ProbForm.TimeTrigger.csproj", "{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.ConsoleApplication", "ProbForm.ConsoleApplication\ProbForm.ConsoleApplication.csproj", "{C3727EE0-15C4-427E-8591-584CB1B46FA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.Alexa", "ProbForm.Alexa\ProbForm.Alexa.csproj", "{973FAD38-9E56-4B9E-9243-CEDAB75FC5BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.WebApi", "ProbForm.WebApi\ProbForm.WebApi.csproj", "{15227F8D-EB40-44EF-A199-76E3549BAE7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.Models", "ProbForm.Models\ProbForm.Models.csproj", "{099850FA-54FF-452D-959B-9998B8B3B67A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.DbContext", "ProbForm.DbContext\ProbForm.DbContext.csproj", "{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.ConsoleApplication", "ProbForm.ConsoleApplication\ProbForm.ConsoleApplication.csproj", "{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,18 +19,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}.Debug|x86.ActiveCfg = Debug|x86
-		{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}.Debug|x86.Build.0 = Debug|x86
-		{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}.Release|x86.ActiveCfg = Release|x86
-		{7DA86A2B-6D36-4CC1-BB0C-1185D8B5769F}.Release|x86.Build.0 = Release|x86
 		{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}.Debug|x86.Build.0 = Debug|Any CPU
 		{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}.Release|x86.ActiveCfg = Release|Any CPU
 		{45853F2A-0A32-48CC-BDD4-1446E2C79EF0}.Release|x86.Build.0 = Release|Any CPU
-		{C3727EE0-15C4-427E-8591-584CB1B46FA7}.Debug|x86.ActiveCfg = Debug|x86
-		{C3727EE0-15C4-427E-8591-584CB1B46FA7}.Debug|x86.Build.0 = Debug|x86
-		{C3727EE0-15C4-427E-8591-584CB1B46FA7}.Release|x86.ActiveCfg = Release|x86
-		{C3727EE0-15C4-427E-8591-584CB1B46FA7}.Release|x86.Build.0 = Release|x86
 		{973FAD38-9E56-4B9E-9243-CEDAB75FC5BD}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{973FAD38-9E56-4B9E-9243-CEDAB75FC5BD}.Debug|x86.Build.0 = Debug|Any CPU
 		{973FAD38-9E56-4B9E-9243-CEDAB75FC5BD}.Release|x86.ActiveCfg = Release|Any CPU
@@ -37,5 +31,17 @@ Global
 		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Debug|x86.Build.0 = Debug|Any CPU
 		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Release|x86.ActiveCfg = Release|Any CPU
 		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Release|x86.Build.0 = Release|Any CPU
+		{099850FA-54FF-452D-959B-9998B8B3B67A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{099850FA-54FF-452D-959B-9998B8B3B67A}.Debug|x86.Build.0 = Debug|Any CPU
+		{099850FA-54FF-452D-959B-9998B8B3B67A}.Release|x86.ActiveCfg = Release|Any CPU
+		{099850FA-54FF-452D-959B-9998B8B3B67A}.Release|x86.Build.0 = Release|Any CPU
+		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Release|x86.Build.0 = Release|Any CPU
+		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Debug|x86.Build.0 = Debug|Any CPU
+		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Release|x86.ActiveCfg = Release|Any CPU
+		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
