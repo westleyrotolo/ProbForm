@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using ProbForm.Models;
 using Match = ProbForm.Models.Match;
+using System.Globalization;
 namespace ProbForm.ConsoleApplication.Services
 {
     public class GazzettaLineupService : ILineupsService
@@ -68,6 +69,7 @@ namespace ProbForm.ConsoleApplication.Services
                 var Match = new Match();
                 var HomeTeam = new Team();
                 var AwayTeam = new Team();
+                Match.MatchTime = MatchDateTime(match);
 
                 HomeTeam.Name = TeamName(match);
                 AwayTeam.Name = TeamName(match, false);
@@ -93,6 +95,13 @@ namespace ProbForm.ConsoleApplication.Services
 
             return matches;
         }
+        public int DayMatch(HtmlNode html)
+        {
+            return int.Parse(Regex.Match(html.Descendants("div")
+                    .First(x => x.GetAttributeValue("class", "")
+                    .Contains("mainHeading")).Descendants("h3")
+                    .First().InnerText, @"\d+").Value);
+        }
         public string TeamName(HtmlNode html, bool home = true)
         {
             return html.Descendants("div")
@@ -111,11 +120,14 @@ namespace ProbForm.ConsoleApplication.Services
                     .First(x => x.GetAttributeValue("class", "")
                     .Contains("modulo")).InnerText.Trim();
         }
-        public string MatchDateTime(HtmlNode html)
+        public DateTime MatchDateTime(HtmlNode html)
         {
-            return html.Descendants("div")
+            //Domenica 3 marzo - Ore 18
+            return DateTime.ParseExact( html.Descendants("div")
                     .First(x => x.GetAttributeValue("class", "")
-                    .Contains("matchDateTime")).InnerText.Trim();
+                    .Contains("matchDateTime"))
+                    .InnerText.Trim().Replace(" - Ore", "")
+                    ,new[] { "dddd d MMMM HH", "dddd d MMMM HH:mm" },CultureInfo.GetCultureInfo("it-IT") );
         }
         public string Mister(HtmlNode html, bool home = true)
         {
