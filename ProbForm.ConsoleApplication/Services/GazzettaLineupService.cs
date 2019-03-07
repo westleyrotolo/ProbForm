@@ -21,7 +21,7 @@ namespace ProbForm.ConsoleApplication.Services
         {
 #if DEBUG
             var file =
-                Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "Mock", "prob_form.html");
+                Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName, "Mock", "prob_form.html");
             using (var reader = File.OpenText(file))
             {
                 return await reader.ReadToEndAsync();
@@ -149,8 +149,8 @@ namespace ProbForm.ConsoleApplication.Services
                 {
                     player = new Player
                     {
-                        Name = Regex.Match(x.InnerText, @"\D+").Value,
-                        Number = Regex.Match(x.InnerText, @"\d+").Value
+                        Name = string.Join(' ', Regex.Matches(x.InnerText, @"[^0-9.]+")).Trim(),
+                        Number = Regex.Match(x.InnerText, @"\d +").Value
                     },
                     Status = StatusPlayer.TITOLARE,
                     Order = i
@@ -166,20 +166,20 @@ namespace ProbForm.ConsoleApplication.Services
         /// <param name="home">If set to <c>true</c> home.</param>
         public List<TeamPlayer> SecondaryTeamPlayer(HtmlNode html, string type, bool home = true)
         {
-
             return TeamPlayerDetails(html, home)
                 .First(x => x.InnerText.Contains($"{type}:"))
                 .InnerText
                 .Replace($"{type}:", "")
                 .Replace("nessuno", "")
                 .Replace("Nessuno", "")
+                .Replace("&ensp;","")
                 .Split(',').Select((x, i) =>
                  new TeamPlayer
                  {
                      player = new Player
                      {
-                         Name = Regex.Match(x, @"\D+").Value.Trim(),
-                         Number = Regex.Match(x, @"\d+").Value
+                         Name = string.Join(' ', Regex.Matches(Regex.Replace(x, @"\((.|\n)*?\)", ""), @"[^0-9.]+")).Trim(),
+                         Number = Regex.Match(Regex.Replace(x, @"\((.|\n)*?\)", ""), @"\d +").Value.Trim()
                      },
                      Status =
                         (StatusPlayer)Enum.Parse(typeof(StatusPlayer),
@@ -188,9 +188,9 @@ namespace ProbForm.ConsoleApplication.Services
                                     .Replace("SQUALIFICATI", "SQUALIFICATO")
                                     .Replace("ALTRI", "ALTRO")),
                      Order = i,
-                     Info = (type.Contains("Squalificati") || type.Contains("Indisponibili"))
-                            ? Regex.Match(x, "(?<=().+? (?=))").Value : ""
+                     Info = Regex.Match(x, @"(?<=\().+?(?=\))").Value
                  })
+                 .Where(x=> !string.IsNullOrEmpty(x.player.Name))
                  .ToList();
         }
         private IEnumerable<HtmlNode> TeamPlayerDetails(HtmlNode html, bool home = true)

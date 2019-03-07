@@ -8,10 +8,10 @@ namespace ProbForm.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MatchId { get; set; }
+        public int Day { get; set; }
         public Team HomeTeam { get; set; }
         public Team AwayTeam { get; set; }
         public DateTime MatchTime { get; set; }
-
         public static Match Create()
         {
             return new Match();
