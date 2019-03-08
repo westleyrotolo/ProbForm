@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProbForm.Models\ProbForm.Models.csproj" />
+    <ProjectReference Include="..\ProbForm.DbContext\ProbForm.DbContext.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.9.1" />

@@ -9,8 +9,8 @@ using ProbForm.DBContext;
 namespace ProbForm.DBContext.Migrations
 {
     [DbContext(typeof(ProbFormDBContext))]
-    [Migration("20190305232119_initial_migration")]
-    partial class initial_migration
+    [Migration("20190308080327_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,50 +20,55 @@ namespace ProbForm.DBContext.Migrations
 
             modelBuilder.Entity("ProbForm.Models.Match", b =>
                 {
-                    b.Property<int>("MatchId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Day");
 
-                    b.Property<int?>("AwayTeamTeamId");
+                    b.Property<string>("HomeTeamId")
+                        .HasMaxLength(50);
 
-                    b.Property<int?>("HomeTeamTeamId");
+                    b.Property<string>("AwayTeamId")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("AwayModule");
+
+                    b.Property<string>("HomeModule");
 
                     b.Property<DateTime>("MatchTime");
 
-                    b.HasKey("MatchId");
+                    b.HasKey("Day", "HomeTeamId", "AwayTeamId");
 
-                    b.HasIndex("AwayTeamTeamId");
+                    b.HasIndex("AwayTeamId");
 
-                    b.HasIndex("HomeTeamTeamId");
+                    b.HasIndex("HomeTeamId");
 
                     b.ToTable("Matches");
                 });
 
             modelBuilder.Entity("ProbForm.Models.Player", b =>
                 {
-                    b.Property<int>("PlayerId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("TeamId")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Number");
 
-                    b.HasKey("PlayerId");
+                    b.HasKey("Name", "TeamId");
+
+                    b.HasAlternateKey("Name");
 
                     b.ToTable("Players");
                 });
 
             modelBuilder.Entity("ProbForm.Models.Team", b =>
                 {
-                    b.Property<int>("TeamId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Name")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50);
 
                     b.Property<string>("Mister");
 
-                    b.Property<string>("Module");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("TeamId");
+                    b.HasKey("Name");
 
                     b.ToTable("Teams");
                 });
@@ -77,17 +82,19 @@ namespace ProbForm.DBContext.Migrations
 
                     b.Property<int>("Order");
 
-                    b.Property<int?>("PlayerId");
-
                     b.Property<int>("Status");
 
-                    b.Property<int?>("TeamId");
+                    b.Property<string>("TeamName");
+
+                    b.Property<string>("playerName");
+
+                    b.Property<string>("playerTeamId");
 
                     b.HasKey("TeamPlayerId");
 
-                    b.HasIndex("PlayerId");
+                    b.HasIndex("TeamName");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("playerName", "playerTeamId");
 
                     b.ToTable("TeamPlayers");
                 });
@@ -96,22 +103,24 @@ namespace ProbForm.DBContext.Migrations
                 {
                     b.HasOne("ProbForm.Models.Team", "AwayTeam")
                         .WithMany()
-                        .HasForeignKey("AwayTeamTeamId");
+                        .HasForeignKey("AwayTeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ProbForm.Models.Team", "HomeTeam")
                         .WithMany()
-                        .HasForeignKey("HomeTeamTeamId");
+                        .HasForeignKey("HomeTeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProbForm.Models.TeamPlayer", b =>
                 {
-                    b.HasOne("ProbForm.Models.Player", "player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId");
-
                     b.HasOne("ProbForm.Models.Team")
                         .WithMany("Players")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamName");
+
+                    b.HasOne("ProbForm.Models.Player", "player")
+                        .WithMany()
+                        .HasForeignKey("playerName", "playerTeamId");
                 });
 #pragma warning restore 612, 618
         }

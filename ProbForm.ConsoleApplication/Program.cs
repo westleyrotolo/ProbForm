@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using ProbForm.ConsoleApplication.Services;
 using ProbForm.Models;
 using System.Linq;
-
+using System.Globalization;
+using ProbForm.DBContext;
 namespace ProbForm.ConsoleApplication
 {
     class MainClass
@@ -15,6 +16,11 @@ namespace ProbForm.ConsoleApplication
             Console.WriteLine("Hello World!");
             lineups = new GazzettaLineupService();
             var matches = await lineups.Matches();
+            using (var dbContext = new ProbFormDBContext())
+            {
+                dbContext.AddRange(matches);
+                dbContext.SaveChanges();
+            }
             Print(matches);
             Console.ReadLine();
 
@@ -27,14 +33,14 @@ namespace ProbForm.ConsoleApplication
             {
                 Console.WriteLine(breakLine);
                 Console.WriteLine(m.HomeTeam.Name);
-                Console.WriteLine(m.HomeTeam.Module);
+                Console.WriteLine(m.HomeModule);
                 Console.WriteLine(line);
                 PrintTeam(m.HomeTeam.Players);
                 Console.WriteLine(m.HomeTeam.Mister);
                 Console.WriteLine(line);
                 Console.WriteLine(line);
                 Console.WriteLine(m.AwayTeam.Name);
-                Console.WriteLine(m.AwayTeam.Module);
+                Console.WriteLine(m.AwayModule);
                 Console.WriteLine(line);
                 PrintTeam(m.AwayTeam.Players);
                 Console.WriteLine(m.AwayTeam.Mister);

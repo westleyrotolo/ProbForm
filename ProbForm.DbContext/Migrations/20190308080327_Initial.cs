@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProbForm.DBContext.Migrations
 {
-    public partial class initial_migration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,56 +11,54 @@ namespace ProbForm.DBContext.Migrations
                 name: "Players",
                 columns: table => new
                 {
-                    PlayerId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    Number = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    TeamId = table.Column<string>(maxLength: 50, nullable: false),
+                    Number = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Players", x => x.PlayerId);
+                    table.PrimaryKey("PK_Players", x => new { x.Name, x.TeamId });
+                    table.UniqueConstraint("AK_Players_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Teams",
                 columns: table => new
                 {
-                    TeamId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Module = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
                     Mister = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teams", x => x.TeamId);
+                    table.PrimaryKey("PK_Teams", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Matches",
                 columns: table => new
                 {
-                    MatchId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    HomeTeamTeamId = table.Column<int>(nullable: true),
-                    AwayTeamTeamId = table.Column<int>(nullable: true),
+                    Day = table.Column<int>(nullable: false),
+                    HomeTeamId = table.Column<string>(maxLength: 50, nullable: false),
+                    AwayTeamId = table.Column<string>(maxLength: 50, nullable: false),
+                    HomeModule = table.Column<string>(nullable: true),
+                    AwayModule = table.Column<string>(nullable: true),
                     MatchTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Matches", x => x.MatchId);
+                    table.PrimaryKey("PK_Matches", x => new { x.Day, x.HomeTeamId, x.AwayTeamId });
                     table.ForeignKey(
-                        name: "FK_Matches_Teams_AwayTeamTeamId",
-                        column: x => x.AwayTeamTeamId,
+                        name: "FK_Matches_Teams_AwayTeamId",
+                        column: x => x.AwayTeamId,
                         principalTable: "Teams",
-                        principalColumn: "TeamId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Name",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Matches_Teams_HomeTeamTeamId",
-                        column: x => x.HomeTeamTeamId,
+                        name: "FK_Matches_Teams_HomeTeamId",
+                        column: x => x.HomeTeamId,
                         principalTable: "Teams",
-                        principalColumn: "TeamId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Name",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,48 +67,49 @@ namespace ProbForm.DBContext.Migrations
                 {
                     TeamPlayerId = table.Column<int>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    PlayerId = table.Column<int>(nullable: true),
+                    playerName = table.Column<string>(nullable: true),
+                    playerTeamId = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
                     Order = table.Column<int>(nullable: false),
                     Info = table.Column<string>(nullable: true),
-                    TeamId = table.Column<int>(nullable: true)
+                    TeamName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TeamPlayers", x => x.TeamPlayerId);
                     table.ForeignKey(
-                        name: "FK_TeamPlayers_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "PlayerId",
+                        name: "FK_TeamPlayers_Teams_TeamName",
+                        column: x => x.TeamName,
+                        principalTable: "Teams",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TeamPlayers_Teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
-                        principalColumn: "TeamId",
+                        name: "FK_TeamPlayers_Players_playerName_playerTeamId",
+                        columns: x => new { x.playerName, x.playerTeamId },
+                        principalTable: "Players",
+                        principalColumns: new[] { "Name", "TeamId" },
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matches_AwayTeamTeamId",
+                name: "IX_Matches_AwayTeamId",
                 table: "Matches",
-                column: "AwayTeamTeamId");
+                column: "AwayTeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matches_HomeTeamTeamId",
+                name: "IX_Matches_HomeTeamId",
                 table: "Matches",
-                column: "HomeTeamTeamId");
+                column: "HomeTeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeamPlayers_PlayerId",
+                name: "IX_TeamPlayers_TeamName",
                 table: "TeamPlayers",
-                column: "PlayerId");
+                column: "TeamName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeamPlayers_TeamId",
+                name: "IX_TeamPlayers_playerName_playerTeamId",
                 table: "TeamPlayers",
-                column: "TeamId");
+                columns: new[] { "playerName", "playerTeamId" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -122,10 +121,10 @@ namespace ProbForm.DBContext.Migrations
                 name: "TeamPlayers");
 
             migrationBuilder.DropTable(
-                name: "Players");
+                name: "Teams");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "Players");
         }
     }
 }

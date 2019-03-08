@@ -1,18 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProbForm.Models
 {
     public class Team
     {
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TeamId { get; set; }
-        public string Name { get; set; }
+        private string name;
+        [Key]
+        [MaxLength(50)]
+        public string Name
+        {
+            get
+            {
+                return name.ToTitleCase();
+            }
+            set
+            {
+                name = value;
+            }
+        }
         public List<TeamPlayer> Players { get; set; }
-        public string Module { get; set; }
-        public string Mister { get; set; }
+
+        private string mister;
+        public string Mister
+        {
+            get
+            {
+                return mister.ToTitleCase();
+            }
+            set
+            {
+                mister = value; 
+            }
+        }
 
         public Team Create()
         {
@@ -26,11 +48,6 @@ namespace ProbForm.Models
         public Team WithPlayers(List<TeamPlayer> players)
         {
             Players = players;
-            return this;
-        }
-        public Team WithModule(string module)
-        {
-            Module = module;
             return this;
         }
         public Team WithMister(string mister)
