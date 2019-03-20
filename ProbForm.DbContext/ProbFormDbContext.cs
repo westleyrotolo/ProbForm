@@ -2,7 +2,7 @@
 using MySql.Data.EntityFrameworkCore;
 using ProbForm.Models;
 
-namespace ProbForm.DBContext
+namespace ProbForm.AppContext
 {
     public class ProbFormDBContext : DbContext
     {
@@ -20,6 +20,16 @@ namespace ProbForm.DBContext
                     .HasKey(m => new { m.Day, m.HomeTeamId, m.AwayTeamId });
             modelBuilder.Entity<Player>()
                     .HasKey(p => new { p.Name, p.TeamId });
+            modelBuilder.Entity<TeamPlayer>()
+                    .HasKey(tp => new { tp.MatchDay, tp.MatchHomeTeamId, tp.MatchAwayTeamId, tp.PlayerNameId, tp.PlayerTeamId });
+            modelBuilder.Entity<Match>()
+                    .HasMany(m => m.TeamPlayers)
+                    .WithOne(tp => tp.Match)
+                    .HasForeignKey(tp => new { tp.MatchDay, tp.MatchHomeTeamId, tp.MatchAwayTeamId });
+            modelBuilder.Entity<Player>()
+                     .HasMany(p => p.TeamPlayers)
+                     .WithOne(tp => tp.Player)
+                     .HasForeignKey(tp => new { tp.PlayerNameId, tp.PlayerTeamId });
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Team> Teams { get; set; }
@@ -31,4 +41,8 @@ namespace ProbForm.DBContext
             return new ProbFormDBContext();
         }
     }
+
+
+
+
 }

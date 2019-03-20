@@ -87,7 +87,8 @@ namespace ProbForm.ConsoleApplication.Services
                     HomeTeam.Players.AddRange(SecondaryTeamPlayer(match, x, HomeTeam));
                     AwayTeam.Players.AddRange(SecondaryTeamPlayer(match, x, AwayTeam, false));
                 });
-
+                HomeTeam.Players.ForEach(x => x.Match = Match);
+                AwayTeam.Players.ForEach(x => x.Match = Match);
                 Match.HomeTeam = HomeTeam;
                 Match.AwayTeam = AwayTeam;
                 matches.Add(Match); 
@@ -168,10 +169,10 @@ namespace ProbForm.ConsoleApplication.Services
             return players.Select((x, i) =>
                 new TeamPlayer
                 {
-                    player = new Player
+                    Player = new Player
                     {
                         Name = string.Join(' ', Regex.Matches(x.InnerText, @"[^0-9.]+")).Trim(),
-                        Number = Regex.Match(x.InnerText, @"\d +").Value,
+                        Number = Regex.Match(x.InnerText, @"\d+").Value,
                         Team = team
                     },
                     Status = StatusPlayer.TITOLARE,
@@ -198,10 +199,10 @@ namespace ProbForm.ConsoleApplication.Services
                 .Split(',').Select((x, i) =>
                  new TeamPlayer
                  {
-                     player = new Player
+                     Player = new Player
                      {
                          Name = string.Join(' ', Regex.Matches(Regex.Replace(x, @"\((.|\n)*?\)", ""), @"[^0-9.]+")).Trim(),
-                         Number = Regex.Match(Regex.Replace(x, @"\((.|\n)*?\)", ""), @"\d +").Value.Trim(),
+                         Number = Regex.Match(Regex.Replace(x, @"\((.|\n)*?\)", ""), @"\d+").Value.Trim(),
                          Team = team
                      },
                      Status =
@@ -213,7 +214,7 @@ namespace ProbForm.ConsoleApplication.Services
                      Order = i,
                      Info = Regex.Match(x, @"(?<=\().+?(?=\))").Value
                  })
-                 .Where(x => !string.IsNullOrEmpty(x.player.Name))
+                 .Where(x => !string.IsNullOrEmpty(x.Player.Name))
                  .ToList();
         }
         private IEnumerable<HtmlNode> TeamPlayerDetails(HtmlNode html, bool home = true)

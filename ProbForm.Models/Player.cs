@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,7 +10,6 @@ namespace ProbForm.Models
 
         private string name;
 
-        [Key]
         [MaxLength(50)]
         public string Name
         {
@@ -24,11 +24,12 @@ namespace ProbForm.Models
         }
         public string Number { get; set; }
 
-        [ForeignKey("Team")]
         [MaxLength(50)]
         public string TeamId { get; set; }
 
         public Team Team { get; set; }
+
+        public List<TeamPlayer> TeamPlayers { get; set; }
 
     }
 }

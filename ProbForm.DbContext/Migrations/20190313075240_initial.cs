@@ -3,24 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProbForm.DBContext.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Players",
-                columns: table => new
-                {
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    TeamId = table.Column<string>(maxLength: 50, nullable: false),
-                    Number = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Players", x => new { x.Name, x.TeamId });
-                    table.UniqueConstraint("AK_Players_Name", x => x.Name);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Teams",
                 columns: table => new
@@ -62,13 +48,33 @@ namespace ProbForm.DBContext.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Players",
+                columns: table => new
+                {
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    TeamId = table.Column<string>(maxLength: 50, nullable: false),
+                    Number = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Players", x => new { x.Name, x.TeamId });
+                    table.ForeignKey(
+                        name: "FK_Players_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Name",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TeamPlayers",
                 columns: table => new
                 {
-                    TeamPlayerId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    playerName = table.Column<string>(nullable: true),
-                    playerTeamId = table.Column<string>(nullable: true),
+                    MatchDay = table.Column<int>(nullable: false),
+                    MatchHomeTeamId = table.Column<string>(maxLength: 50, nullable: false),
+                    MatchAwayTeamId = table.Column<string>(maxLength: 50, nullable: false),
+                    PlayerNameId = table.Column<string>(maxLength: 50, nullable: false),
+                    PlayerTeamId = table.Column<string>(maxLength: 50, nullable: false),
                     Status = table.Column<int>(nullable: false),
                     Order = table.Column<int>(nullable: false),
                     Info = table.Column<string>(nullable: true),
@@ -76,7 +82,7 @@ namespace ProbForm.DBContext.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeamPlayers", x => x.TeamPlayerId);
+                    table.PrimaryKey("PK_TeamPlayers", x => new { x.MatchDay, x.MatchHomeTeamId, x.MatchAwayTeamId, x.PlayerNameId, x.PlayerTeamId });
                     table.ForeignKey(
                         name: "FK_TeamPlayers_Teams_TeamName",
                         column: x => x.TeamName,
@@ -84,11 +90,17 @@ namespace ProbForm.DBContext.Migrations
                         principalColumn: "Name",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TeamPlayers_Players_playerName_playerTeamId",
-                        columns: x => new { x.playerName, x.playerTeamId },
+                        name: "FK_TeamPlayers_Players_PlayerNameId_PlayerTeamId",
+                        columns: x => new { x.PlayerNameId, x.PlayerTeamId },
                         principalTable: "Players",
                         principalColumns: new[] { "Name", "TeamId" },
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeamPlayers_Matches_MatchDay_MatchHomeTeamId_MatchAwayTeamId",
+                        columns: x => new { x.MatchDay, x.MatchHomeTeamId, x.MatchAwayTeamId },
+                        principalTable: "Matches",
+                        principalColumns: new[] { "Day", "HomeTeamId", "AwayTeamId" },
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -102,29 +114,34 @@ namespace ProbForm.DBContext.Migrations
                 column: "HomeTeamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Players_TeamId",
+                table: "Players",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TeamPlayers_TeamName",
                 table: "TeamPlayers",
                 column: "TeamName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeamPlayers_playerName_playerTeamId",
+                name: "IX_TeamPlayers_PlayerNameId_PlayerTeamId",
                 table: "TeamPlayers",
-                columns: new[] { "playerName", "playerTeamId" });
+                columns: new[] { "PlayerNameId", "PlayerTeamId" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Matches");
-
-            migrationBuilder.DropTable(
                 name: "TeamPlayers");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "Players");
 
             migrationBuilder.DropTable(
-                name: "Players");
+                name: "Matches");
+
+            migrationBuilder.DropTable(
+                name: "Teams");
         }
     }
 }

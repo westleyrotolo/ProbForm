@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using ProbForm.AppContext;
 using ProbForm.ConsoleApplication.Services;
 using ProbForm.Models;
-using System.Linq;
-using System.Globalization;
-using ProbForm.DBContext;
+
 namespace ProbForm.ConsoleApplication
 {
     class MainClass
@@ -16,12 +16,55 @@ namespace ProbForm.ConsoleApplication
             Console.WriteLine("Hello World!");
             lineups = new GazzettaLineupService();
             var matches = await lineups.Matches();
-            using (var dbContext = new ProbFormDBContext())
-            {
-                dbContext.AddRange(matches);
-                dbContext.SaveChanges();
-            }
             Print(matches);
+            using (var appContext = new AppContext.ProbFormDBContext())
+            {
+                foreach (var m in matches)
+                {
+
+                    try
+                    {
+                        if (appContext.Matches.Count(x =>
+                            x.HomeTeam.Name == m.HomeTeam.Name
+                            && x.AwayTeam.Name == m.AwayTeam.Name
+                            && x.Day == m.Day
+                        ) > 0)
+                        {
+                            appContext.Remove(m.HomeTeam);
+                            appContext.Remove(m.AwayTeam);
+                            m.HomeTeam.Players.ForEach((x) =>
+                            {
+                                appContext.Remove(x);
+                                appContext.Remove(x.Player);
+                            });
+                            m.AwayTeam.Players.ForEach((x) =>
+                            {
+                                appContext.Remove(x);
+                                appContext.Remove(x.Player);
+                            });
+                            appContext.Entry(m).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                            await appContext.SaveChangesAsync();
+                        }
+
+                        appContext.Matches.Add(m);
+                        appContext.Teams.Add(m.HomeTeam);
+                        appContext.Teams.Add(m.AwayTeam);
+
+                        await appContext.SaveChangesAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("PORCO DIO");
+                    }
+                }
+                try
+                {
+                }
+                catch (Exception ex)
+                {
+
+                 }
+            }
             Console.ReadLine();
 
         }
@@ -55,35 +98,35 @@ namespace ProbForm.ConsoleApplication
                   .OrderBy(x => x.Order)
                   .ToList()
                   .ForEach(x =>
-                      Console.WriteLine(x.player.Name));
+                      Console.WriteLine(x.Player.Name));
             Console.WriteLine(line);
             Console.WriteLine("Panchina:");
             t.Where(x => x.Status == StatusPlayer.PANCHINA)
                     .OrderBy(x => x.Order)
                     .ToList()
                     .ForEach(x =>
-                        Console.WriteLine(x.player.Name));
+                        Console.WriteLine(x.Player.Name));
 
             Console.WriteLine("Squalificati:");
             t.Where(x => x.Status == StatusPlayer.SQUALIFICATO)
                     .OrderBy(x => x.Order)
                     .ToList()
                     .ForEach(x =>
-                        Console.WriteLine($"{x.player.Name} - {x.Info}"));
+                        Console.WriteLine($"{x.Player.Name} - {x.Info}"));
 
             Console.WriteLine("Indisponibile:");
             t.Where(x => x.Status == StatusPlayer.INDISPONIBILE)
                         .OrderBy(x => x.Order)
                         .ToList()
                         .ForEach(x =>
-                            Console.WriteLine($"{x.player.Name} - {x.Info}"));
+                            Console.WriteLine($"{x.Player.Name} - {x.Info}"));
 
             Console.WriteLine("Altro:");
             t.Where(x => x.Status == StatusPlayer.ALTRO)
                         .OrderBy(x => x.Order)
                         .ToList()
                         .ForEach(x =>
-                            Console.WriteLine($"{x.player.Name} - {x.Info}"));
+                            Console.WriteLine($"{x.Player.Name} - {x.Info}"));
             Console.WriteLine(line);
 
         }

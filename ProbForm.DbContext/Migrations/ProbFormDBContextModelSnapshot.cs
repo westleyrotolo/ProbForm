@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProbForm.DBContext;
+using ProbForm.AppContext;
 
 namespace ProbForm.DBContext.Migrations
 {
     [DbContext(typeof(ProbFormDBContext))]
-    [Migration("20190308080634_Team_FK")]
-    partial class Team_FK
+    partial class ProbFormDBContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,8 +53,6 @@ namespace ProbForm.DBContext.Migrations
 
                     b.HasKey("Name", "TeamId");
 
-                    b.HasAlternateKey("Name");
-
                     b.HasIndex("TeamId");
 
                     b.ToTable("Players");
@@ -77,8 +73,19 @@ namespace ProbForm.DBContext.Migrations
 
             modelBuilder.Entity("ProbForm.Models.TeamPlayer", b =>
                 {
-                    b.Property<int>("TeamPlayerId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("MatchDay");
+
+                    b.Property<string>("MatchHomeTeamId")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("MatchAwayTeamId")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("PlayerNameId")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("PlayerTeamId")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Info");
 
@@ -88,15 +95,11 @@ namespace ProbForm.DBContext.Migrations
 
                     b.Property<string>("TeamName");
 
-                    b.Property<string>("playerName");
-
-                    b.Property<string>("playerTeamId");
-
-                    b.HasKey("TeamPlayerId");
+                    b.HasKey("MatchDay", "MatchHomeTeamId", "MatchAwayTeamId", "PlayerNameId", "PlayerTeamId");
 
                     b.HasIndex("TeamName");
 
-                    b.HasIndex("playerName", "playerTeamId");
+                    b.HasIndex("PlayerNameId", "PlayerTeamId");
 
                     b.ToTable("TeamPlayers");
                 });
@@ -128,9 +131,15 @@ namespace ProbForm.DBContext.Migrations
                         .WithMany("Players")
                         .HasForeignKey("TeamName");
 
-                    b.HasOne("ProbForm.Models.Player", "player")
-                        .WithMany()
-                        .HasForeignKey("playerName", "playerTeamId");
+                    b.HasOne("ProbForm.Models.Player", "Player")
+                        .WithMany("TeamPlayers")
+                        .HasForeignKey("PlayerNameId", "PlayerTeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProbForm.Models.Match", "Match")
+                        .WithMany("TeamPlayers")
+                        .HasForeignKey("MatchDay", "MatchHomeTeamId", "MatchAwayTeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

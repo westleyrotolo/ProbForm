@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,17 +9,20 @@ namespace ProbForm.Models
     {
 
         public int Day { get; set; }
-        [ForeignKey("HomeTeam")]
-        [MaxLength(50)]
-        public string HomeTeamId { get; set; }
-        [ForeignKey("AwayTeam")]
-        [MaxLength(50)]
-        public string AwayTeamId { get; set; }
         public Team HomeTeam { get; set; }
         public Team AwayTeam { get; set; }
+
+        [MaxLength(50)]
+        public string HomeTeamId { get; set; }
+        [MaxLength(50)]
+        public string AwayTeamId { get; set; }
+
         public string HomeModule { get; set; }
         public string AwayModule { get; set; }
         public DateTime MatchTime { get; set; }
+
+        public List<TeamPlayer> TeamPlayers { get; set; }
+
         public static Match Create()
         {
             return new Match();
