@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using Match = ProbForm.Models.Match;
+using ProbForm.AppContext;
+using Newtonsoft.Json;
+using ProbForm.Models;
 namespace ProbForm.WebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -12,34 +15,20 @@ namespace ProbForm.WebApi.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public JsonResult Matches()
         {
-            return new string[] { "value1", "value2" };
+            var result = AppDBHelper.MatchesOfTheDay();
+            Console.WriteLine(result.Count);
+            return new JsonResult(result);
+        }
+        [HttpGet("search")]
+        public JsonResult Player(string player)
+        {
+            var result = AppDBHelper.PlayerInfo(player);
+            Console.WriteLine(result.Count);
+            return new JsonResult(result);
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }

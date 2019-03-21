@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace ProbForm.Models
 {
@@ -11,9 +12,10 @@ namespace ProbForm.Models
         public int Day { get; set; }
         public Team HomeTeam { get; set; }
         public Team AwayTeam { get; set; }
-
+        [JsonIgnore]
         [MaxLength(50)]
         public string HomeTeamId { get; set; }
+        [JsonIgnore]
         [MaxLength(50)]
         public string AwayTeamId { get; set; }
 
@@ -21,6 +23,7 @@ namespace ProbForm.Models
         public string AwayModule { get; set; }
         public DateTime MatchTime { get; set; }
 
+        [JsonIgnore]
         public List<TeamPlayer> TeamPlayers { get; set; }
 
         public static Match Create()

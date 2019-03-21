@@ -6,6 +6,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.25" />
     <PackageReference Include="HtmlAgilityPack" Version="1.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
@@ -21,6 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProbForm.Models\ProbForm.Models.csproj" />
-    <ProjectReference Include="..\ProbForm.DbContext\ProbForm.DbContext.csproj" />
+    <ProjectReference Include="..\ProbForm.DbContext\ProbForm.AppContext.csproj" />
   </ItemGroup>
 </Project>

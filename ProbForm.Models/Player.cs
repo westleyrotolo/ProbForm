@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace ProbForm.Models
 {
@@ -24,12 +25,13 @@ namespace ProbForm.Models
         }
         public string Number { get; set; }
 
+        [JsonIgnore]
         [MaxLength(50)]
         public string TeamId { get; set; }
-
-        public Team Team { get; set; }
-
-        public List<TeamPlayer> TeamPlayers { get; set; }
+        [JsonIgnore]
+        public virtual Team Team { get; set; }
+        [JsonIgnore]
+        public virtual List<TeamPlayer> TeamPlayers { get; set; }
 
     }
 }

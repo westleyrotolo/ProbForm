@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace ProbForm.Models
 {
@@ -16,16 +17,18 @@ namespace ProbForm.Models
 
         [MaxLength(50)]
         public string MatchAwayTeamId { get; set; }
+        [JsonIgnore]
+        public virtual Match Match { get; set; }
 
-        public Match Match { get; set; }
-
+        [JsonIgnore]
         [MaxLength(50)]
         public string PlayerNameId { get; set; }
 
+        [JsonIgnore]
         [MaxLength(50)]
         public string PlayerTeamId { get; set; }
 
-        public Player Player { get; set; }
+        public virtual Player Player { get; set; }
         public StatusPlayer Status { get; set; }
         public int Order { get; set; }
         public string Info { get; set; }

@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.AppContext", "Prob
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.ConsoleApplication", "ProbForm.ConsoleApplication\ProbForm.ConsoleApplication.csproj", "{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "ProbForm.Alexa", "ProbForm.Alexa\ProbForm.Alexa.csproj", "{BFEE39D5-02AE-4325-AAB4-752CC926392A}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "ProbForm.Alexa", "ProbForm.Alexa\ProbForm.Alexa.csproj", "{E5091AAD-D9A4-40B0-930C-54029F5523CF}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "ProbForm.TimeTrigger", "ProbForm.TimeTrigger\ProbForm.TimeTrigger.csproj", "{BD9227DF-F71A-41C4-99B9-3A9A7E726F54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.TimeTrigger", "ProbForm.TimeTrigger\ProbForm.TimeTrigger.csproj", "{3617998D-883F-41C9-9D09-485749C82D9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,13 +35,13 @@ Global
 		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Debug|x86.Build.0 = Debug|Any CPU
 		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Release|x86.ActiveCfg = Release|Any CPU
 		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Release|x86.Build.0 = Release|Any CPU
-		{BFEE39D5-02AE-4325-AAB4-752CC926392A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BFEE39D5-02AE-4325-AAB4-752CC926392A}.Debug|x86.Build.0 = Debug|Any CPU
-		{BFEE39D5-02AE-4325-AAB4-752CC926392A}.Release|x86.ActiveCfg = Release|Any CPU
-		{BFEE39D5-02AE-4325-AAB4-752CC926392A}.Release|x86.Build.0 = Release|Any CPU
-		{BD9227DF-F71A-41C4-99B9-3A9A7E726F54}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BD9227DF-F71A-41C4-99B9-3A9A7E726F54}.Debug|x86.Build.0 = Debug|Any CPU
-		{BD9227DF-F71A-41C4-99B9-3A9A7E726F54}.Release|x86.ActiveCfg = Release|Any CPU
-		{BD9227DF-F71A-41C4-99B9-3A9A7E726F54}.Release|x86.Build.0 = Release|Any CPU
+		{E5091AAD-D9A4-40B0-930C-54029F5523CF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E5091AAD-D9A4-40B0-930C-54029F5523CF}.Debug|x86.Build.0 = Debug|Any CPU
+		{E5091AAD-D9A4-40B0-930C-54029F5523CF}.Release|x86.ActiveCfg = Release|Any CPU
+		{E5091AAD-D9A4-40B0-930C-54029F5523CF}.Release|x86.Build.0 = Release|Any CPU
+		{3617998D-883F-41C9-9D09-485749C82D9A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3617998D-883F-41C9-9D09-485749C82D9A}.Debug|x86.Build.0 = Debug|Any CPU
+		{3617998D-883F-41C9-9D09-485749C82D9A}.Release|x86.ActiveCfg = Release|Any CPU
+		{3617998D-883F-41C9-9D09-485749C82D9A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

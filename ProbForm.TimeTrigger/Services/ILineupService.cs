@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using ProbForm.Models;
 
-namespace probform.Service
+namespace ProbForm.TimeTrigger.Services
 {
     public interface ILineupsService
     {
@@ -13,3 +13,4 @@ namespace probform.Service
         Task<List<Match>> Matches();
     }
 }
+    

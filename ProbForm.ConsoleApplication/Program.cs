@@ -17,54 +17,8 @@ namespace ProbForm.ConsoleApplication
             lineups = new GazzettaLineupService();
             var matches = await lineups.Matches();
             Print(matches);
-            using (var appContext = new AppContext.ProbFormDBContext())
-            {
-                foreach (var m in matches)
-                {
-
-                    try
-                    {
-                        if (appContext.Matches.Count(x =>
-                            x.HomeTeam.Name == m.HomeTeam.Name
-                            && x.AwayTeam.Name == m.AwayTeam.Name
-                            && x.Day == m.Day
-                        ) > 0)
-                        {
-                            appContext.Remove(m.HomeTeam);
-                            appContext.Remove(m.AwayTeam);
-                            m.HomeTeam.Players.ForEach((x) =>
-                            {
-                                appContext.Remove(x);
-                                appContext.Remove(x.Player);
-                            });
-                            m.AwayTeam.Players.ForEach((x) =>
-                            {
-                                appContext.Remove(x);
-                                appContext.Remove(x.Player);
-                            });
-                            appContext.Entry(m).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-                            await appContext.SaveChangesAsync();
-                        }
-
-                        appContext.Matches.Add(m);
-                        appContext.Teams.Add(m.HomeTeam);
-                        appContext.Teams.Add(m.AwayTeam);
-
-                        await appContext.SaveChangesAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("PORCO DIO");
-                    }
-                }
-                try
-                {
-                }
-                catch (Exception ex)
-                {
-
-                 }
-            }
+            matches.ForEach(async (m) =>
+               await AppDBHelper.InsertOrUpdate(m));
             Console.ReadLine();
 
         }
