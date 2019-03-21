@@ -14,21 +14,34 @@ namespace ProbForm.WebApi.Controllers
     public class ValuesController : ControllerBase
     {
         // GET api/values
-        [HttpGet]
+        [HttpGet("full")]
         public JsonResult Matches()
         {
             var result = AppDBHelper.MatchesOfTheDay();
             Console.WriteLine(result.Count);
             return new JsonResult(result);
         }
-        [HttpGet("search")]
-        public JsonResult Player(string player)
+        [HttpGet("players/{player}")]
+        public ActionResult Player(string player)
         {
             var result = AppDBHelper.PlayerInfo(player);
             Console.WriteLine(result.Count);
             return new JsonResult(result);
         }
 
-       
+        [HttpGet("teams")]
+        public ActionResult Teams()
+        {
+            var result = AppDBHelper.Teams();
+            Console.WriteLine(result.Count);
+            return new JsonResult(result);
+        }
+        [HttpGet]
+        public JsonResult MatchOfTheDay(int day = 0)
+        {
+            var result = AppDBHelper.OnlyMatchesOfTheDay();
+            Console.WriteLine(result.Count);
+            return new JsonResult(result);
+        }
     }
 }

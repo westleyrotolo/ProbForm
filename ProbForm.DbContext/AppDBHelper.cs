@@ -68,6 +68,19 @@ namespace ProbForm.AppContext
                         .ToList();
             }
         }
+        public static List<Match> OnlyMatchesOfTheDay(int day = 0)
+        {
+            using (var context = new ProbFormDBContext())
+            {
+                CheckDay(ref day);
+                return context.Matches.Where(x =>
+                        x.Day == day)
+                        .Include(x => x.HomeTeam)
+                        .Include(x => x.AwayTeam)
+                        .ToList();
+            }
+        }
+        
         public static List<string> Teams()
         {
             using (var context = new ProbFormDBContext())
