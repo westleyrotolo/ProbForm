@@ -11,7 +11,7 @@ namespace ProbForm.AppContext
             base.OnConfiguring(optionsBuilder);
             if (optionsBuilder != null)
             {
-                optionsBuilder.UseMySQL("Server=localhost;Database=ProbForm;Uid=root;Pwd=wesrot92");
+                optionsBuilder.UseMySQL("Server=localhost;Database=ProbForm;Uid=root;Pwd=admin");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

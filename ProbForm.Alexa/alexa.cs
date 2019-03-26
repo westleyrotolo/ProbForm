@@ -1,27 +1,24 @@
-using System;
+
 using System.IO;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
 
 namespace ProbForm.Alexa
 {
-    public static class ProbFormAlexa
+    public static class Function1
     {
-        [FunctionName("ProbFormAlexa")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+        [FunctionName("Function1")]
+        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, TraceWriter log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            log.Info("C# HTTP trigger function processed a request.");
 
             string name = req.Query["name"];
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            string requestBody = new StreamReader(req.Body).ReadToEnd();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
 

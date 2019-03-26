@@ -1,47 +1,90 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.WebApi", "ProbForm.WebApi\ProbForm.WebApi.csproj", "{15227F8D-EB40-44EF-A199-76E3549BAE7B}"
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProbForm.WebApi", "ProbForm.WebApi\ProbForm.WebApi.csproj", "{15227F8D-EB40-44EF-A199-76E3549BAE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.Models", "ProbForm.Models\ProbForm.Models.csproj", "{099850FA-54FF-452D-959B-9998B8B3B67A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProbForm.Models", "ProbForm.Models\ProbForm.Models.csproj", "{099850FA-54FF-452D-959B-9998B8B3B67A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.AppContext", "ProbForm.DbContext\ProbForm.AppContext.csproj", "{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProbForm.AppContext", "ProbForm.DbContext\ProbForm.AppContext.csproj", "{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.ConsoleApplication", "ProbForm.ConsoleApplication\ProbForm.ConsoleApplication.csproj", "{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProbForm.ConsoleApplication", "ProbForm.ConsoleApplication\ProbForm.ConsoleApplication.csproj", "{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "ProbForm.Alexa", "ProbForm.Alexa\ProbForm.Alexa.csproj", "{E5091AAD-D9A4-40B0-930C-54029F5523CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProbForm.Services", "ProbForm.Services\ProbForm.Services.csproj", "{53D6FB74-4286-4231-9524-E13D13834558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.TimeTrigger", "ProbForm.TimeTrigger\ProbForm.TimeTrigger.csproj", "{3617998D-883F-41C9-9D09-485749C82D9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProbForm.TimeTrigger", "ProbForm.TimeTrigger\ProbForm.TimeTrigger.csproj", "{439B2B8D-69A4-4281-9E1B-816E490C83C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProbForm.Alexa", "ProbForm.Alexa\ProbForm.Alexa.csproj", "{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Debug|x86.Build.0 = Debug|Any CPU
+		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Release|x86.ActiveCfg = Release|Any CPU
 		{15227F8D-EB40-44EF-A199-76E3549BAE7B}.Release|x86.Build.0 = Release|Any CPU
+		{099850FA-54FF-452D-959B-9998B8B3B67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{099850FA-54FF-452D-959B-9998B8B3B67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{099850FA-54FF-452D-959B-9998B8B3B67A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{099850FA-54FF-452D-959B-9998B8B3B67A}.Debug|x86.Build.0 = Debug|Any CPU
+		{099850FA-54FF-452D-959B-9998B8B3B67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{099850FA-54FF-452D-959B-9998B8B3B67A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{099850FA-54FF-452D-959B-9998B8B3B67A}.Release|x86.ActiveCfg = Release|Any CPU
 		{099850FA-54FF-452D-959B-9998B8B3B67A}.Release|x86.Build.0 = Release|Any CPU
+		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Release|x86.ActiveCfg = Release|Any CPU
 		{2BED8CA8-E71E-4A50-9766-6E7F2F6867A1}.Release|x86.Build.0 = Release|Any CPU
+		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Debug|x86.Build.0 = Debug|Any CPU
+		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Release|x86.ActiveCfg = Release|Any CPU
 		{1FB05C2D-FFFF-46D2-87FB-B3CEB8AB6A69}.Release|x86.Build.0 = Release|Any CPU
-		{E5091AAD-D9A4-40B0-930C-54029F5523CF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E5091AAD-D9A4-40B0-930C-54029F5523CF}.Debug|x86.Build.0 = Debug|Any CPU
-		{E5091AAD-D9A4-40B0-930C-54029F5523CF}.Release|x86.ActiveCfg = Release|Any CPU
-		{E5091AAD-D9A4-40B0-930C-54029F5523CF}.Release|x86.Build.0 = Release|Any CPU
-		{3617998D-883F-41C9-9D09-485749C82D9A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3617998D-883F-41C9-9D09-485749C82D9A}.Debug|x86.Build.0 = Debug|Any CPU
-		{3617998D-883F-41C9-9D09-485749C82D9A}.Release|x86.ActiveCfg = Release|Any CPU
-		{3617998D-883F-41C9-9D09-485749C82D9A}.Release|x86.Build.0 = Release|Any CPU
+		{53D6FB74-4286-4231-9524-E13D13834558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D6FB74-4286-4231-9524-E13D13834558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D6FB74-4286-4231-9524-E13D13834558}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{53D6FB74-4286-4231-9524-E13D13834558}.Debug|x86.Build.0 = Debug|Any CPU
+		{53D6FB74-4286-4231-9524-E13D13834558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D6FB74-4286-4231-9524-E13D13834558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D6FB74-4286-4231-9524-E13D13834558}.Release|x86.ActiveCfg = Release|Any CPU
+		{53D6FB74-4286-4231-9524-E13D13834558}.Release|x86.Build.0 = Release|Any CPU
+		{439B2B8D-69A4-4281-9E1B-816E490C83C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{439B2B8D-69A4-4281-9E1B-816E490C83C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{439B2B8D-69A4-4281-9E1B-816E490C83C4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{439B2B8D-69A4-4281-9E1B-816E490C83C4}.Debug|x86.Build.0 = Debug|Any CPU
+		{439B2B8D-69A4-4281-9E1B-816E490C83C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{439B2B8D-69A4-4281-9E1B-816E490C83C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{439B2B8D-69A4-4281-9E1B-816E490C83C4}.Release|x86.ActiveCfg = Release|Any CPU
+		{439B2B8D-69A4-4281-9E1B-816E490C83C4}.Release|x86.Build.0 = Release|Any CPU
+		{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}.Debug|x86.Build.0 = Debug|Any CPU
+		{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}.Release|x86.ActiveCfg = Release|Any CPU
+		{2A74FEF5-7D8B-413A-B92E-2E1B181957B4}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51782466-377B-4E80-BA2E-4946D7B46EC7}
 	EndGlobalSection
 EndGlobal

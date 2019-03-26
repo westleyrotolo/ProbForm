@@ -1,15 +1,15 @@
-﻿    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
-    using HtmlAgilityPack;
-    using ProbForm.Models;
-    using Match = ProbForm.Models.Match;
-    using System.Globalization;
-namespace ProbForm.ConsoleApplication.Services
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using HtmlAgilityPack;
+using ProbForm.Models;
+using Match = ProbForm.Models.Match;
+using System.Globalization;
+namespace ProbForm.Services
 {
     public class GazzettaLineupService : ILineupsService
     {
@@ -91,7 +91,7 @@ namespace ProbForm.ConsoleApplication.Services
                 AwayTeam.Players.ForEach(x => x.Match = Match);
                 Match.HomeTeam = HomeTeam;
                 Match.AwayTeam = AwayTeam;
-                matches.Add(Match); 
+                matches.Add(Match);
 
             }
 
@@ -99,7 +99,7 @@ namespace ProbForm.ConsoleApplication.Services
         }
         public int DayMatch(HtmlNode html)
         {
-              
+
             return int.Parse(Regex.Match(html.Descendants("div")
                    .First(x => x.GetAttributeValue("class", "")
                    .Contains("mainHeading")).Descendants("h3")
@@ -130,11 +130,11 @@ namespace ProbForm.ConsoleApplication.Services
         {
             //Domenica 3 marzo - Ore 18
             //Venerdì 1 marzo - Ore 20.30
-            return DateTime.ParseExact( html.Descendants("div")
+            return DateTime.ParseExact(html.Descendants("div")
                     .First(x => x.GetAttributeValue("class", "")
                     .Contains("matchDateTime"))
-                    .InnerText.Trim().Replace(" - Ore", "",true,CultureInfo.GetCultureInfo("IT-it"))
-                    ,new[] { "dddd d MMMM HH", "dddd d MMMM HH.mm" },CultureInfo.GetCultureInfo("IT-it") );
+                    .InnerText.Trim().Replace(" - Ore", "", true, CultureInfo.GetCultureInfo("IT-it"))
+                    , new[] { "dddd d MMMM HH", "dddd d MMMM HH.mm" }, CultureInfo.GetCultureInfo("IT-it"));
         }
         public string Mister(HtmlNode html, bool home = true)
         {
@@ -145,7 +145,7 @@ namespace ProbForm.ConsoleApplication.Services
                    .First(x => x.GetAttributeValue("class", "")
                    .Contains("mister"))
                    .InnerText
-                   .Replace("Allenatore: ","",true, CultureInfo.GetCultureInfo("IT-it"))
+                   .Replace("Allenatore: ", "", true, CultureInfo.GetCultureInfo("IT-it"))
                    .Trim();
         }
         public List<TeamPlayer> PrincipalTeamsPlayer(HtmlNode html, Team team, bool home = true)

@@ -1,12 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AzureFunctionsVersion></AzureFunctionsVersion>
+    <AzureFunctionsVersion>v2</AzureFunctionsVersion>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.25" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.9.0" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.26" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProbForm.DbContext\ProbForm.AppContext.csproj" />
+    <ProjectReference Include="..\ProbForm.Services\ProbForm.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
@@ -16,12 +22,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ProbForm.Models\ProbForm.Models.csproj" />
-    <ProjectReference Include="..\ProbForm.DbContext\ProbForm.AppContext.csproj" />
   </ItemGroup>
 </Project>

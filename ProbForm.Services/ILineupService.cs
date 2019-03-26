@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ProbForm.Models;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
-using ProbForm.Models;
 
-namespace ProbForm.ConsoleApplication.Services
+namespace ProbForm.Services
 {
     public interface ILineupsService
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ProbForm.AppContext;
-using ProbForm.ConsoleApplication.Services;
+using ProbForm.Services;
 using ProbForm.Models;
 
 namespace ProbForm.ConsoleApplication

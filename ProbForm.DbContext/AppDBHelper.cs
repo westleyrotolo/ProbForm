@@ -51,6 +51,11 @@ namespace ProbForm.AppContext
                 return true;
             }
         }
+        /// <summary>
+        /// Fetch all match incluse player
+        /// </summary>
+        /// <param name="day">Week match</param>
+        /// <returns></returns>
         public static List<Match> MatchesOfTheDay(int day = 0)
         {
             using (var context = new ProbFormDBContext())
@@ -68,6 +73,11 @@ namespace ProbForm.AppContext
                         .ToList();
             }
         }
+        /// <summary>
+        /// Fetch list match
+        /// </summary>
+        /// <param name="day">Week day</param>
+        /// <returns>Match</returns>
         public static List<Match> OnlyMatchesOfTheDay(int day = 0)
         {
             using (var context = new ProbFormDBContext())
@@ -80,7 +90,10 @@ namespace ProbForm.AppContext
                         .ToList();
             }
         }
-        
+        /// <summary>
+        /// Fetch all team
+        /// </summary>
+        /// <returns>Teams</returns>
         public static List<string> Teams()
         {
             using (var context = new ProbFormDBContext())
@@ -90,6 +103,13 @@ namespace ProbForm.AppContext
                         .ToList();
             }
         }
+        /// <summary>
+        /// Search match
+        /// </summary>
+        /// <param name="day">Week match</param>
+        /// <param name="team1">First team</param>
+        /// <param name="team2">Second team</param>
+        /// <returns>Match</returns>
         public static Match MatchOfTheDay(int day = 0, string team1 = "", string team2 ="")
         {
             using (var context = new ProbFormDBContext())
@@ -107,6 +127,12 @@ namespace ProbForm.AppContext
                                || x.HomeTeam.Name.Contains(team2)));
             }
         }
+        /// <summary>
+        /// Status of player in a match
+        /// </summary>
+        /// <param name="name">Name of player</param>
+        /// <param name="day">Week match</param>
+        /// <returns>Player</returns>
         public static List<TeamPlayer> PlayerInfo(string name, int day = 0)
         {
             using (var context = new ProbFormDBContext())

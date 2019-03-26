@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Mock\prob_form.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mock\prob_form.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProbForm.DbContext\ProbForm.AppContext.csproj" />
+    <ProjectReference Include="..\ProbForm.Models\ProbForm.Models.csproj" />
+  </ItemGroup>
+
+</Project>

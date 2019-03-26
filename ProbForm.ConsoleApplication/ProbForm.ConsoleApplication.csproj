@@ -12,21 +12,12 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Mock\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ProbForm.Models\ProbForm.Models.csproj" />
     <ProjectReference Include="..\ProbForm.DbContext\ProbForm.AppContext.csproj" />
+    <ProjectReference Include="..\ProbForm.Services\ProbForm.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.9.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Mock\prob_form.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mock\prob_form.html" />
   </ItemGroup>
 </Project>

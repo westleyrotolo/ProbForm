@@ -13,7 +13,6 @@ namespace ProbForm.WebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
         [HttpGet("full")]
         public JsonResult Matches()
         {
@@ -22,9 +21,9 @@ namespace ProbForm.WebApi.Controllers
             return new JsonResult(result);
         }
         [HttpGet("players/{player}")]
-        public ActionResult Player(string player)
+        public ActionResult Player(string player, int day = 0)
         {
-            var result = AppDBHelper.PlayerInfo(player);
+            var result = AppDBHelper.PlayerInfo(player, day);
             Console.WriteLine(result.Count);
             return new JsonResult(result);
         }
@@ -36,10 +35,17 @@ namespace ProbForm.WebApi.Controllers
             Console.WriteLine(result.Count);
             return new JsonResult(result);
         }
+        [HttpGet("match")]
+        public ActionResult Match(string team1="", string team2="", int day =0)
+        {
+            var result = AppDBHelper.MatchOfTheDay(day, team1, team2);
+            Console.WriteLine($"#{result.Day}, {result.HomeTeam.Name} - {result.AwayTeam.Name}");
+            return new JsonResult(result);
+        }
         [HttpGet]
         public JsonResult MatchOfTheDay(int day = 0)
         {
-            var result = AppDBHelper.OnlyMatchesOfTheDay();
+            var result = AppDBHelper.OnlyMatchesOfTheDay(day);
             Console.WriteLine(result.Count);
             return new JsonResult(result);
         }
