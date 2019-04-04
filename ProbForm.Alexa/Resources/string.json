@@ -1,3 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-</configuration>
+﻿{
+  "SessionEndedMessage": "Alla prossima",
+  "TutorialText1": "Con Probabili Formazioni puoi chiedere le partite e le probabili formazioni della giornata di campionato",
+  "TutorialText2": "Con Probabili Formazioni puoi anche chiedere se un giocatore è titolare, in panchina o indisponibile",
+  "UnknownRequestErrorMessage": "Richiesta sconosciuta o non supportata",
+  "NotImplementedErrorMessage": "La funzionalit\u00E0 non \u00E8 ancora pronta o in rilascio. Grazie della pazienza!",
+  "LaunchRequestMessage": "Benvenuto in probabili formazioni. ",
+  "HelpIntentTitle": "Aiuto"
+
+}   

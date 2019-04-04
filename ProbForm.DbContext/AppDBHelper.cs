@@ -115,16 +115,23 @@ namespace ProbForm.AppContext
             using (var context = new ProbFormDBContext())
             {
                 CheckDay(ref day);
+                team1 = team1.ToLower();
+                team2 = team2.ToLower();
+              
                 if (string.IsNullOrEmpty(team1) && string.IsNullOrEmpty(team2))
                 {
                     throw new ArgumentException("At least one of team1 and team2 has must been evaluated");
                 }
-                return context.Matches.First(x =>
+                var r = context.Matches.Where(x => x.AwayTeam.Name.ToLower().Contains(team1)).ToList();
+                return context.Matches
+                          .Include(x=>x.HomeTeam)
+                          .Include(x=>x.AwayTeam)
+                          .First(x =>
                            x.Day == day
-                           && (x.HomeTeam.Name.Contains(team1)
-                               || x.AwayTeam.Name.Contains(team2))
-                           && (x.HomeTeam.Name.Contains(team1)
-                               || x.HomeTeam.Name.Contains(team2)));
+                           && (x.HomeTeam.Name.ToLower().Contains(team1)
+                               && x.AwayTeam.Name.ToLower().Contains(team2))
+                           || (x.AwayTeam.Name.ToLower().Contains(team1)
+                               && x.HomeTeam.Name.ToLower().Contains(team2)));
             }
         }
         /// <summary>

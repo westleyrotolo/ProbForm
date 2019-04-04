@@ -6,25 +6,51 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Net;
+using Alexa.NET.Request;
+using System.Text;
+using ProbForm.Alexa.Common;
+using System.Threading.Tasks;
 
 namespace ProbForm.Alexa
 {
-    public static class Function1
+    public static class alexa
     {
-        [FunctionName("Function1")]
-        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, TraceWriter log)
+        [FunctionName("alexa")]
+        public async static Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequest req, TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
+            if (req == null)
+            {   
+                throw new ArgumentNullException(nameof(req));
+            }
 
-            string name = req.Query["name"];
+            if (req.Body == null)
+            {
+                throw new ArgumentNullException(nameof(req) + "." + nameof(HttpRequestMessage.Content));
+            }
 
-            string requestBody = new StreamReader(req.Body).ReadToEnd();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+            var json = await req.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent("Invalid or empty JSON")
+                };
+            }
 
-            return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name}")
-                : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+            var skillRequest = JsonConvert.DeserializeObject<SkillRequest>(json);
+
+            var skillResponse = await CommonFunctions.ExecuteAsync(skillRequest);
+
+            json = JsonConvert.SerializeObject(skillResponse);
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
         }
     }
 }

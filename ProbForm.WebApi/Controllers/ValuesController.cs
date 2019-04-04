@@ -20,7 +20,7 @@ namespace ProbForm.WebApi.Controllers
             Console.WriteLine(result.Count);
             return new JsonResult(result);
         }
-        [HttpGet("players/{player}")]
+        [HttpGet("teamplayers/{player}")]
         public ActionResult Player(string player, int day = 0)
         {
             var result = AppDBHelper.PlayerInfo(player, day);
@@ -38,7 +38,7 @@ namespace ProbForm.WebApi.Controllers
         [HttpGet("match")]
         public ActionResult Match(string team1="", string team2="", int day =0)
         {
-            var result = AppDBHelper.MatchOfTheDay(day, team1, team2);
+            var result = AppDBHelper.MatchOfTheDay(day, team1.Trim(), team2.Trim());
             Console.WriteLine($"#{result.Day}, {result.HomeTeam.Name} - {result.AwayTeam.Name}");
             return new JsonResult(result);
         }

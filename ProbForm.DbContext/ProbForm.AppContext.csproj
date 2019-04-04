@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Mock\prob_form.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mock\prob_form.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ProbForm.Models\ProbForm.Models.csproj" />
   </ItemGroup>
   <ItemGroup>

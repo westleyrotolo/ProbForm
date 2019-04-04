@@ -15,6 +15,7 @@ namespace ProbForm.ConsoleApplication
         {
             Console.WriteLine("Hello World!");
             lineups = new GazzettaLineupService();
+            
             var matches = await lineups.Matches();
             Print(matches);
             matches.ForEach(async (m) =>
