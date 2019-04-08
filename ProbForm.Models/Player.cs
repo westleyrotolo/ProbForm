@@ -24,8 +24,7 @@ namespace ProbForm.Models
             }
         }
         public string Number { get; set; }
-
-        [JsonIgnore]
+        
         [MaxLength(50)]
         public string TeamId { get; set; }
         [JsonIgnore]

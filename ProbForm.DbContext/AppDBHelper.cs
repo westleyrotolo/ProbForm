@@ -124,8 +124,12 @@ namespace ProbForm.AppContext
                 }
                 var r = context.Matches.Where(x => x.AwayTeam.Name.ToLower().Contains(team1)).ToList();
                 return context.Matches
-                          .Include(x=>x.HomeTeam)
-                          .Include(x=>x.AwayTeam)
+                        .Include(x => x.HomeTeam)
+                        .Include(x => x.AwayTeam)
+                        .Include(x => x.HomeTeam.Players)
+                        .Include("HomeTeam.Players.Player")
+                        .Include(x => x.AwayTeam.Players)
+                        .Include("AwayTeam.Players.Player")
                           .First(x =>
                            x.Day == day
                            && (x.HomeTeam.Name.ToLower().Contains(team1)
@@ -148,6 +152,7 @@ namespace ProbForm.AppContext
                 return context.TeamPlayers.Where(x =>
                             x.Player.Name.Contains(name))
                             .Include(x=>x.Player)
+                            .Include(x=>x.Player.Team)
                             .ToList();
             }
         } 

@@ -19,7 +19,7 @@ namespace ProbForm.Alexa
     public static class alexa
     {
         [FunctionName("alexa")]
-        public async static Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequest req, TraceWriter log)
+        public async static Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]HttpRequest req, TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
             if (req == null)

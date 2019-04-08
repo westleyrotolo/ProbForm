@@ -6,7 +6,7 @@ namespace ProbForm.Alexa.Helpers
 {
     public static class UrlKeys
     {
-        public const string BASE_URL = "http://localhost:5001/api/values";
+        public const string BASE_URL = "https://localhost:44337/api/values";
 
         public static string GET_ALL_MATCHES = BASE_URL + "/full";
         public static string GET_TEAMPLAYERS = BASE_URL + "/teamplayers/{0}";

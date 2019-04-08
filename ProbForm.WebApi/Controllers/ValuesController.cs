@@ -38,6 +38,7 @@ namespace ProbForm.WebApi.Controllers
         [HttpGet("match")]
         public ActionResult Match(string team1="", string team2="", int day =0)
         {
+            team2 = team2 ?? "";
             var result = AppDBHelper.MatchOfTheDay(day, team1.Trim(), team2.Trim());
             Console.WriteLine($"#{result.Day}, {result.HomeTeam.Name} - {result.AwayTeam.Name}");
             return new JsonResult(result);

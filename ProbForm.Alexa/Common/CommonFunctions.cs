@@ -53,7 +53,7 @@ namespace ProbForm.Alexa.Common
                                         return SkillBuilder.BuildInvalidSkillResponse();
                                     }
                                     var players = await HttpUtility.GetTeamPlayers(slot.Value);
-                                    if (players == null || players.Count > 0)
+                                    if (players == null || players.Count == 0)
                                     {
                                         // implement specific response
                                         return SkillBuilder.BuildInvalidSkillResponse();
