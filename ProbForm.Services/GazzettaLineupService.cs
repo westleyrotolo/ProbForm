@@ -21,14 +21,14 @@ namespace ProbForm.Services
         public async Task<string> FetchData()
         {
 #if DEBUG
-            var file =
-                Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName, "Mock", "prob_form.html");
-            using (var reader = File.OpenText(file))
-            {
-                return await reader.ReadToEndAsync();
-            }
+//            var file =
+//                Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName, "Mock", "prob_form.html");
+//            using (var reader = File.OpenText(file))
+//            {
+//                return await reader.ReadToEndAsync();
+//            }
 
-#else
+//#else
             string page = "https://www.gazzetta.it/Calcio/prob_form/?refresh_ce";
             using (HttpClient client = new HttpClient())
             using (HttpResponseMessage response = await client.GetAsync(page))
@@ -111,7 +111,7 @@ namespace ProbForm.Services
                     .First(x => x.GetAttributeValue("class", "")
                     .Contains("match")).Descendants("div")
                     .First(x => x.GetAttributeValue("class", "")
-                    .Contains(home ? "homeTeam" : "awayTeam"))
+                    .Contains(home ? "fxr-right-center" : "fxr-left-center"))
                     .InnerText.Trim();
         }
         public string Module(HtmlNode html, bool home = true)
