@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Alexa.NET" Version="1.5.7" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.26" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProbForm.Models\ProbForm.Models.csproj" />
